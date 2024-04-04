@@ -31,6 +31,8 @@ The `UrlShortenerController` handles the logic for URL shortening, redirection, 
 
     - Template: `dashboard.html.twig`
     - Logic: Retrieves URL statistics and URL list from the database.
+          ** Clicks ** : number of visits to the site through the shortened url.
+          **Unique referrers :  number of unique sources that linked the shortened url. ( you can test this by accessing a shortened url through '/' and '/shorten' route.
 
 2. **shorten:** This method handles the URL shortening functionality. It renders the `form.html.twig` template, which contains a form for submitting the original URL. After form submission, it generates a short code, saves the URL entity to the database, and renders the `shortened_url.html.twig` template to display the shortened URL.
 
@@ -50,7 +52,7 @@ The `UrlShortenerController` handles the logic for URL shortening, redirection, 
 
 ## Deployment
 
-The application should be deployed on a web server. After deployment, users can access both the frontend and shorten urls, that should update the database and data displayed.
+The application should be deployed on a web server. After deployment, users can access the interace and shorten urls, that should update the database and data displayed.
 
 
 
