@@ -4,6 +4,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Click;
 use App\Entity\Url;
 use App\Form\UrlType;
 use App\Service\UrlShortenerService;
@@ -44,7 +45,7 @@ class UrlShortenerController extends AbstractController
     }
     
     #[Route('/r/{shortCode}', name: 'redirect_short_code')]
-    public function redirectShortCode(string $shortCode, EntityManagerInterface $entityManager): Response
+    public function redirectShortCode(string $shortCode, EntityManagerInterface $entityManager, Request $request): Response
     {
         $urlRepository = $entityManager->getRepository(Url::class);
         $url = $urlRepository->findOneBy(['shortCode' => $shortCode]);
@@ -52,6 +53,16 @@ class UrlShortenerController extends AbstractController
         if (!$url) {
             throw $this->createNotFoundException('The short URL does not exist.');
         }
+
+        // Create and save the click
+        $click = new Click();
+        $click->setUrl($url);
+        $click->setClickedAt(new \DateTime());
+        $click->setSourceIp($request->getClientIp());
+        $click->setReferrer($request->headers->get('referer'));
+
+        $entityManager->persist($click);
+        $entityManager->flush();
 
         return $this->redirect($url->getOriginalUrl());
     }
