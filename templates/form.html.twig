@@ -4,7 +4,11 @@
 
 {% block body %}
 <div class="row justify-content-md-center">
+    <div class="mb-3 mt-4 text-center">
+        <a href="{{ path('analytics_dashboard') }}" class="btn btn-secondary mb-3">Go back</a>
+    </div>
     <div class="col-md-6">
+
         <h2 class="mb-3 text-center">Shorten Your URL</h2>
         {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
         <div class="mb-3">
@@ -17,16 +21,5 @@
         </div>
         {{ form_end(form) }}
     </div>
-    <div class="url-list mt-4" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
-        <div style="width: 100%; display: flex; margin-top: 100px; justify-content: center;">
-            {% for url in urls %}
-                {% include 'components/url_item.html.twig' with {'url': url} %}
-                {% if loop.index is divisible by(3) %}
-                    </div><div style="width: 100%; display: flex; justify-content: center;">
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-
 </div>
 {% endblock %}

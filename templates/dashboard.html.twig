@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="mb-4 text-end">
+        <a href="{{ path('app_shorten') }}" class="btn btn-primary">Create Short URL</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Analytics Dashboard</h2>
+        </div>
+        <div class="card-body">
+            <div class="url-list mt-4 mb-5" style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px;">
+                <div style="width: 100%; display: flex; margin-top: 100px; justify-content: center;">
+                    {% for url in urls %}
+                        {% include 'components/url_item.html.twig' with {'url': url} %}
+                        {% if loop.index is divisible by(3) %}
+                            </div><div style="width: 100%; display: flex; justify-content: center;">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Original URL</th>
+                            <th scope="col">Short Code</th>
+                            <th scope="col">Clicks</th>
+                            <th scope="col">Unique Referrers</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in urlStats %}
+                            <tr>
+                                <td>{{ stat.originalUrl }}</td>
+                                <td>{{ stat.shortCode }}</td>
+                                <td>{{ stat.clickCount }}</td>
+                                <td>{{ stat.referrerCount }}</td>
+
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center">No data available.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

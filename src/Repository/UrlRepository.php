@@ -21,6 +21,19 @@ class UrlRepository extends ServiceEntityRepository
         parent::__construct($registry, Url::class);
     }
 
+    public function getUrlStats(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id, u.originalUrl, u.shortCode, COUNT(DISTINCT c.id) AS clickCount, COUNT(DISTINCT c.referrer) AS referrerCount')
+            ->leftJoin('u.clicks', 'c')
+            ->groupBy('u.id')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+
+
 //    /**
 //     * @return Url[] Returns an array of Url objects
 //     */

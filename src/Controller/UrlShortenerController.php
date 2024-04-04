@@ -16,6 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UrlShortenerController extends AbstractController
 {
+    #[Route('/', name: 'analytics_dashboard')]
+    public function dashboard(EntityManagerInterface $entityManager): Response
+    {
+        $urlRepository = $entityManager->getRepository(Url::class);
+        $urlStats = $urlRepository->getUrlStats();
+        $urls = $entityManager->getRepository(Url::class)->findAll();
+
+        return $this->render('dashboard.html.twig', [
+            'urlStats' => $urlStats,
+            'urls' => $urls,
+        ]);
+    }
+
     #[Route('/shorten', name: 'app_shorten', methods: ['GET', 'POST'])]
     public function shorten(Request $request, UrlShortenerService $urlShortenerService, EntityManagerInterface $entityManager): Response
     {
@@ -36,11 +49,9 @@ class UrlShortenerController extends AbstractController
             ]);
         }
 
-        $urls = $entityManager->getRepository(Url::class)->findAll();
         
         return $this->render('form.html.twig', [
             'form' => $form->createView(),
-            'urls' => $urls,
         ]);
     }
     

@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class="text-center">
+        <div class="mb-3 mt-4 text-center">
+            <a href="{{ path('app_shorten') }}" class="btn btn-secondary mb-3">Go back</a>
+        </div>
     <h2>Your shortened URL:</h2>
     <p><a href="{{ path('redirect_short_code', {'shortCode': url.shortCode}) }}" class="btn btn-success">{{ app.request.schemeAndHttpHost }}/r/{{ url.shortCode }}</a></p>
     <a href="{{ path('app_shorten') }}" class="btn btn-link">Shorten another URL</a>
