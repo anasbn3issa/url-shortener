@@ -49,8 +49,8 @@
                     <tbody>
                         {% for stat in urlStats %}
                             <tr>
-                                <td>{{ stat.originalUrl }}</td>
-                                <td><a href="{{ path('redirect_short_code', {'shortCode': stat.shortCode}) }}">{{ stat.shortCode }}</a></td>
+                                <td>{{ stat.originalUrl|slice(0, 60) }}...</td>
+                                <td><a target="_blank" href="{{ path('redirect_short_code', {'shortCode': stat.shortCode}) }}">{{ stat.shortCode }}</a></td>
                                 <td>{{ stat.clickCount }}</td>
                                 <td>{{ stat.referrerCount }}</td>
 
