@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Analytics Dashboard{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
@@ -31,7 +42,7 @@
                             <th scope="col">Original URL</th>
                             <th scope="col">Short Code</th>
                             <th scope="col">Clicks</th>
-                            <th scope="col">Unique Referrers</th>
+                            <th scope="col">Unique Referrers    <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Counts each distinct source that links to the URL."></i></th>
 
                         </tr>
                     </thead>
@@ -39,7 +50,7 @@
                         {% for stat in urlStats %}
                             <tr>
                                 <td>{{ stat.originalUrl }}</td>
-                                <td>{{ stat.shortCode }}</td>
+                                <td><a href="{{ path('redirect_short_code', {'shortCode': stat.shortCode}) }}">{{ stat.shortCode }}</a></td>
                                 <td>{{ stat.clickCount }}</td>
                                 <td>{{ stat.referrerCount }}</td>
 
