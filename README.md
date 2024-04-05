@@ -4,6 +4,18 @@
 
 This project is a URL shortener with click tracking functionality built using Symfony 6.0 and PHP 8.0. It allows users to shorten URLs and track clicks on those shortened URLs.
 
+## Screenshots 
+### Enter a URL in the Form
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/f14b84ca-f119-4c00-9afc-766629b9a10f)
+
+### Generate a Shortened URL
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/f980c0f1-15d6-49e1-a079-64041ef2169d)
+
+### Analytics Dashboard
+Visualize all shortened URLs and stats via the Analytics dashboard:
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/3fde36ef-574e-4485-8311-18169973e037)
+
+
 ## Components
 
 1. **Click Entity:** The `Click` entity represents a click event on a shortened URL. It contains fields to store information such as the clicked timestamp, source IP address, referrer, and the associated URL.
