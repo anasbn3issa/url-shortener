@@ -4,6 +4,18 @@
 
 This project is a URL shortener with click tracking functionality built using Symfony 6.0 and PHP 8.0. It allows users to shorten URLs and track clicks on those shortened URLs.
 
+## Screenshots 
+### Enter a URL in the Form
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/f14b84ca-f119-4c00-9afc-766629b9a10f)
+
+### Generate a Shortened URL
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/f980c0f1-15d6-49e1-a079-64041ef2169d)
+
+### Analytics Dashboard
+Visualize all shortened URLs and stats via the Analytics dashboard:
+![image](https://github.com/anasbn3issa/url-shortener/assets/47992691/3fde36ef-574e-4485-8311-18169973e037)
+
+
 ## Components
 
 1. **Click Entity:** The `Click` entity represents a click event on a shortened URL. It contains fields to store information such as the clicked timestamp, source IP address, referrer, and the associated URL.
@@ -31,6 +43,8 @@ The `UrlShortenerController` handles the logic for URL shortening, redirection, 
 
     - Template: `dashboard.html.twig`
     - Logic: Retrieves URL statistics and URL list from the database.
+          ** Clicks ** : number of visits to the site through the shortened url.
+          **Unique referrers :  number of unique sources that linked the shortened url. ( you can test this by accessing a shortened url through '/' and '/shorten' route.
 
 2. **shorten:** This method handles the URL shortening functionality. It renders the `form.html.twig` template, which contains a form for submitting the original URL. After form submission, it generates a short code, saves the URL entity to the database, and renders the `shortened_url.html.twig` template to display the shortened URL.
 
@@ -50,7 +64,7 @@ The `UrlShortenerController` handles the logic for URL shortening, redirection, 
 
 ## Deployment
 
-The application should be deployed on a web server. After deployment, users can access both the frontend and shorten urls, that should update the database and data displayed.
+The application should be deployed on a web server. After deployment, users can access the interace and shorten urls, that should update the database and data displayed.
 
 
 
