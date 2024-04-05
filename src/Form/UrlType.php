@@ -8,16 +8,25 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class UrlType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('originalUrl', TextType::class, [
-                'label' => 'URL to shorten',
-                'attr' => ['class' => 'form-control']
-            ])
+        ->add('originalUrl', TextType::class, [
+            'label' => 'URL to shorten',
+            'attr' => ['class' => 'form-control'],
+            'constraints' => [
+                new Assert\NotBlank(['message' => 'Please enter a URL.']),
+                new Assert\Url([
+                    'message' => 'The URL {{ value }} is not a valid URL. Make sure it starts with "http" or "https".',
+                    'protocols' => ['http', 'https'],
+                ]),
+            ],
+        ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Shorten',
                 'attr' => ['class' => 'btn btn-primary mt-2']

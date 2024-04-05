@@ -70,7 +70,7 @@ class UrlShortenerController extends AbstractController
         $click->setUrl($url);
         $click->setClickedAt(new \DateTime());
         $click->setSourceIp($request->getClientIp());
-        $click->setReferrer($request->headers->get('referer'));
+        $click->setReferrer($request->headers->get('referer') ?? '');
 
         $entityManager->persist($click);
         $entityManager->flush();
